@@ -38,7 +38,7 @@ function concertQuery() {
         } else {
             artist += searched[i];
         }
-    }
+    };
     var queryUrl = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
     axios.get(queryUrl).then(function(response) {
         //console.log(queryUrl);
@@ -51,4 +51,34 @@ function concertQuery() {
     });
 }
 
-function songQuery()
+function songQuery() {
+    var song = "";
+    for (var i = 3; i < searched.length; i++) {
+        if (i > 3 && i < searched.length) {
+            song = song + "+" + searched[i];
+        } else {
+            song += searched[i];
+        }
+    };
+    spotify.search({ type: "track", query: song}, function (err, data) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("Artist: " + data.tracks.items[0].artists[0].name);
+        console.log("Song Name: " + data.tracks.items[0].name);
+        console.log("Preview Song " + data.tracks.items[0].preview_url);
+        console.log("Album Name: " + data.tracks.items[0].album.name);
+
+    });
+}
+
+function movieQuery() {
+    var movie = "";
+    for (var i = 3; i < searched.length; i++) {
+        if (i > 3 && i < searched.length) {
+            movie = movie + "+" + searched[i];
+        } else {
+            movie += searched[i];
+        }
+    };
+}
